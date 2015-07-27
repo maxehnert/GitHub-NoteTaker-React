@@ -19,10 +19,7 @@ var Profile = React.createClass({
     }
   },
 
-  componentDidMount: function() {
-    // create a new instance of firebase
-    //this will return an object full of firebase type properties which get saved to the ref property
-    this.ref = new Firebase('https://github-notetaker-max.firebaseio.com/');
+  init: function() {
     // go one route deeper in the url endpoint on firebase
     var childRef = this.ref.child(this.getParams().username);
     this.bindAsArray(childRef, 'notes');
@@ -36,9 +33,21 @@ var Profile = React.createClass({
       }.bind(this));
   },
 
+  componentDidMount: function() {
+    // create a new instance of firebase
+    //this will return an object full of firebase type properties which get saved to the ref property
+    this.ref = new Firebase('https://github-notetaker-max.firebaseio.com/');
+    this.init();
+  },
+
   componentWillUnmount: function() {
     // remove the listener
     this.unbind('notes');
+  },
+
+  componentWillReceiveProps: function() {
+    this.unbind('notes');
+    this.init();
   },
 
   handleAddNote: function(newNote) {

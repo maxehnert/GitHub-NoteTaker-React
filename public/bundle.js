@@ -23699,10 +23699,7 @@
 	    };
 	  },
 
-	  componentDidMount: function componentDidMount() {
-	    // create a new instance of firebase
-	    //this will return an object full of firebase type properties which get saved to the ref property
-	    this.ref = new Firebase('https://github-notetaker-max.firebaseio.com/');
+	  init: function init() {
 	    // go one route deeper in the url endpoint on firebase
 	    var childRef = this.ref.child(this.getParams().username);
 	    this.bindAsArray(childRef, 'notes');
@@ -23715,9 +23712,21 @@
 	    }).bind(this));
 	  },
 
+	  componentDidMount: function componentDidMount() {
+	    // create a new instance of firebase
+	    //this will return an object full of firebase type properties which get saved to the ref property
+	    this.ref = new Firebase('https://github-notetaker-max.firebaseio.com/');
+	    this.init();
+	  },
+
 	  componentWillUnmount: function componentWillUnmount() {
 	    // remove the listener
 	    this.unbind('notes');
+	  },
+
+	  componentWillReceiveProps: function componentWillReceiveProps() {
+	    this.unbind('notes');
+	    this.init();
 	  },
 
 	  handleAddNote: function handleAddNote(newNote) {
