@@ -23997,7 +23997,7 @@
 	          this.props.username
 	        ),
 	        _react2['default'].createElement(_AddNote2['default'], { username: this.props.username, addNote: this.props.addNote }),
-	        _react2['default'].createElement(_NotesList2['default'], { notes: this.props.notes })
+	        _react2['default'].createElement(_NotesList2['default'], { notes: (this.props.notes, this.props.notesUser) })
 	      );
 	    }
 	  }]);
@@ -24064,7 +24064,9 @@
 	      return _react2["default"].createElement(
 	        "ul",
 	        { className: "list-group" },
-	        notes
+	        notes,
+	        " ",
+	        notesUser
 	      );
 	    }
 	  }]);
@@ -24113,8 +24115,9 @@
 	  _createClass(AddNote, [{
 	    key: 'handleSubmit',
 	    value: function handleSubmit() {
-	      var newNote = this.refs.note.getDOMNode().value;
+	      var newNote = [this.refs.note.getDOMNode().value, this.refs.noteUser.getDOMNode().value];
 	      this.refs.note.getDOMNode().value = '';
+	      this.refs.noteUser.getDOMNode().value = '';
 	      this.props.addNote(newNote);
 	    }
 	  }, {
@@ -24124,6 +24127,7 @@
 	        'div',
 	        { className: 'input-group' },
 	        _react2['default'].createElement('input', { type: 'text', className: 'form-control', ref: 'note', placeholder: 'add new note' }),
+	        _react2['default'].createElement('input', { type: 'text', className: 'form-control', ref: 'noteUser', placeholder: 'enter your name' }),
 	        _react2['default'].createElement(
 	          'span',
 	          { className: 'input-group-btn' },
@@ -24284,6 +24288,7 @@
 	        _react2["default"].createElement(
 	          "ul",
 	          { className: "list-group" },
+	          "// ",
 	          this.props.bio.avatar_url && _react2["default"].createElement(
 	            "li",
 	            { className: "list-group-item" },

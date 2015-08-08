@@ -7,10 +7,10 @@ class NotesList extends React.Component {
     });
     return (
       <ul className="list-group">
-        {notes}
+        {notes} {notesUser}
       </ul>
     )
   }
 };
 
-export default NotesList ;
+export default NotesList;

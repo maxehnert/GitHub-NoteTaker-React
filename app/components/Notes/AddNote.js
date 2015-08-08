@@ -3,8 +3,9 @@ import React from 'react';
 class AddNote extends React.Component {
 
   handleSubmit() {
-    var newNote = this.refs.note.getDOMNode().value;
+    var newNote = [this.refs.note.getDOMNode().value,this.refs.noteUser.getDOMNode().value ]
     this.refs.note.getDOMNode().value = '';
+    this.refs.noteUser.getDOMNode().value = '';
     this.props.addNote(newNote);
   }
 
@@ -12,6 +13,7 @@ class AddNote extends React.Component {
     return (
       <div className="input-group">
         <input type="text" className="form-control" ref="note" placeholder="add new note"/>
+        <input type="text" className="form-control" ref="noteUser" placeholder="enter your name" />
         <span className="input-group-btn">
           <button className="btn btn-default" type="button" onClick={this.handleSubmit.bind(this)}> Submit </button>
         </span>
